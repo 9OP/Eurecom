@@ -11,3 +11,5 @@ Fall 2019:
 Spring 2020:
 - AML
 - DeepLearning
+
+- MOOC: Data Science specialization Michigan University Coursera
