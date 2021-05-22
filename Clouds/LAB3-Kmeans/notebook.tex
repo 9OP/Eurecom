@@ -1,0 +1,1457 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{kmeans}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{large-scale-distributed-k-means-algorithm}{%
+\section{\texorpdfstring{Large-scale Distributed \(k\)-means
+Algorithm}{Large-scale Distributed k-means Algorithm}}\label{large-scale-distributed-k-means-algorithm}}
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\textbf{Martin GUYARD, https://github.com/9OP}
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+In this Notebook, we'll focus on the development of a simple distributed
+algorithm. As for the Notebook on SGD, we focus on iterative algorithms,
+which eventually converge to a desired solution.
+
+In what follows, we'll proceed with the following steps:
+
+\begin{itemize}
+\tightlist
+\item
+  We first introduce formally the \(k\)-means algorithm
+\item
+  Then we focus on a serial implementation. To do this, we'll first
+  generate some data using scikit. In passing, we'll also use the
+  \(k\)-means implementation in scikit to have a baseline to compare
+  against.
+\item
+  Subsequently, we will focus on some important considerations and
+  improvements to the serial implementation of \(k\)-means.
+\item
+  At this point, we'll design our distributed version of the \(k\)-means
+  algorithm using pyspark, and re-implement the enhancements we designed
+  for the serial version
+\end{itemize}
+
+\hypertarget{references}{%
+\paragraph{References:}\label{references}}
+
+\begin{itemize}
+\tightlist
+\item
+  https://en.wikipedia.org/wiki/K-means\_clustering
+\item
+  http://nbviewer.jupyter.org/github/ethen8181/machine-learning/blob/master/clustering/kmeans.ipynb
+\item
+  https://apache.googlesource.com/spark/+/master/examples/src/main/python/kmeans.py
+\item
+  https://github.com/castanan/w2v/blob/master/ml-scripts/w2vAndKmeans.py
+\end{itemize}
+
+    \hypertarget{preamble-code}{%
+\paragraph{Preamble code}\label{preamble-code}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{stats} \PY{k}{import} \PY{n}{norm}
+        \PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{spatial}\PY{n+nn}{.}\PY{n+nn}{distance} \PY{k}{import} \PY{n}{euclidean}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{cluster} \PY{k}{import} \PY{n}{KMeans}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{pairwise\PYZus{}distances}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{datasets}\PY{n+nn}{.}\PY{n+nn}{samples\PYZus{}generator} \PY{k}{import} \PY{n}{make\PYZus{}blobs}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn} \PY{k}{import} \PY{n}{datasets}
+        \PY{k+kn}{import} \PY{n+nn}{time}
+\end{Verbatim}
+
+
+    \hypertarget{preliminaries-the-k-means-algorithm}{%
+\section{\texorpdfstring{Preliminaries: the \(k\)-means
+algorithm}{Preliminaries: the k-means algorithm}}\label{preliminaries-the-k-means-algorithm}}
+
+\(k\)-means clustering aims to partition \(n\) \(d-\)dimensional
+observations into \(k\) clusters in which each observation belongs to
+the cluster with the nearest mean, serving as a prototype of the
+cluster. This results in a partitioning of the data space into Voronoi
+cells. The problem is computationally difficult (NP-hard); however,
+there are efficient heuristic algorithms that are commonly employed and
+converge quickly to a local optimum. In this Notebook we'll focus on one
+of them in particular: the Lloyd algorithm.
+
+The \(k\)-means problem can be formalized as follows. Given a set of
+observations \((x_1, x_2, \cdots, x_n)\), where each observation is a
+\(d\)-dimensional real vector, \(k\)-means clustering aims to partition
+the \(n\) observations into \(k \leq n\) sets
+\(S = \{S_1, S_2, \cdots, S_k\}\) so as to minimize the within-cluster
+sum of squares (WCSS) (i.e.~variance). The objective is to find:
+
+\[
+\arg \min_S \sum_{i=1}^{k} \sum_{x \in S_i} || \boldsymbol{x} - \boldsymbol{\mu_i} ||^2
+\]
+
+    The most common algorithm uses an iterative refinement technique. Given
+an initial set of \(k\) centroids \(\mu_1^{(1)}, \cdots, \mu_k^{(1)}\) ,
+the algorithm proceeds by alternating between two steps: in the
+\textbf{assignment step}, observations are associated to the closest
+\textbf{centroid}, in terms of squared Euclidean distance; in the
+\textbf{update step} new centroids are computed based on the new points
+associated to each centroid. Note: \(\mu_i^{(t)}\) stands for the
+\(i\)-th centroid as of the \(t\)-th iteration. So \(\mu_1^{(1)}\) is
+the centroid 1 at iteration 1.
+
+    \hypertarget{algorithm-pseudo-code}{%
+\subsection{Algorithm pseudo-code}\label{algorithm-pseudo-code}}
+
+It is important to work on a principled approach to the design of
+large-scale algorithms, and this starts with using good data structures
+and scientific libraries, such as \texttt{numpy} and \texttt{scipy}. In
+particular, we will focus on the use of \texttt{numpy} arrays, which
+come with efficient methods for array operations. A pseudo-code for the
+\(k\)-means algorithm is specified below:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{def}\NormalTok{ kmeans(X, k, maxiter, seed}\OperatorTok{=}\VariableTok{None}\NormalTok{):}
+    \CommentTok{"""}
+\CommentTok{    specify the number of clusters k and}
+\CommentTok{    the maximum iteration to run the algorithm}
+\CommentTok{    """}
+
+    \CommentTok{# randomly choose k data points as initial centroids}
+\NormalTok{    centroids }\OperatorTok{=}\NormalTok{ X[rand_indices]}
+    
+    \ControlFlowTok{for}\NormalTok{ itr }\KeywordTok{in} \BuiltInTok{range}\NormalTok{(maxiter):}
+        \CommentTok{# ---------------}
+        \CommentTok{# ASSIGNMENT STEP}
+        \CommentTok{# ---------------}
+        \CommentTok{# compute the distance matrix between each data point and the set of centroids}
+\NormalTok{        distance_matrix }\OperatorTok{=} \CommentTok{# row Index = data point Index; col Index = centroid Index; value=distance}
+        \CommentTok{# assign each data point to the closest centroid}
+\NormalTok{        cluster_assignment }\OperatorTok{=} \CommentTok{# array Index = data point Index; array value = closest centroid Index}
+        
+        \CommentTok{# UPDATE STEP}
+        \CommentTok{# select all data points that belong to cluster i and compute}
+        \CommentTok{# the mean of these data points (each feature individually)}
+        \CommentTok{# this will be our new cluster centroids}
+\NormalTok{        new_centroids }\OperatorTok{=}\NormalTok{ ...}
+        
+        \CommentTok{# STOP CONDITION}
+        \CommentTok{# if centroids == new_centroids => stop}
+ 
+    
+\end{Highlighting}
+\end{Shaded}
+
+    \hypertarget{synthetic-data-generation-working-in-bi-dimensional-spaces}{%
+\section{Synthetic data generation: working in bi-dimensional
+spaces}\label{synthetic-data-generation-working-in-bi-dimensional-spaces}}
+
+Next, we use sklearn to generate some synthetic data to test our
+algorithm.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}277}]:} \PY{n}{X}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{n}{make\PYZus{}blobs}\PY{p}{(}\PY{n}{n\PYZus{}samples} \PY{o}{=} \PY{l+m+mi}{300}\PY{p}{,} \PY{n}{centers} \PY{o}{=} \PY{l+m+mi}{4}\PY{p}{,}
+                            \PY{n}{random\PYZus{}state} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{,} \PY{n}{cluster\PYZus{}std} \PY{o}{=} \PY{l+m+mf}{0.6}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}278}]:} \PY{c+c1}{\PYZsh{} change default figure and font size}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{rcParams}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{figure.figsize}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{8}\PY{p}{,} \PY{l+m+mi}{6} 
+          \PY{n}{plt}\PY{o}{.}\PY{n}{rcParams}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{font.size}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{12}
+          
+          \PY{c+c1}{\PYZsh{} scatter plot}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{X}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{s} \PY{o}{=} \PY{l+m+mi}{50}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{ylim}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{xlim}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{6}\PY{p}{,} \PY{l+m+mi}{6}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{gca}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{set\PYZus{}aspect}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{equal}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_8_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Question 1. Implement your own version of k-means, as a serial
+algorithm.
+
+Follow the guidelines below:
+
+Define a function to perform k-means clustering. The function should
+accept as inputs: the training data x, the number of clusters k, and the
+iteration budget you allocate to the algorithm. Additional arguments
+might include the use of a random seed to initialize centroids.
+
+The function should output the centroids, and the cluster assignment,
+that is, to which centroid each data point is assigned to
+
+Optionally, keep track of the position of the centroids, for each
+iteration.
+
+ Once the \texttt{kmeans} function is defined, you can generate input
+data according to the cell above, that uses scikitlearn.
+
+The output of your cell should contain the following information:
+
+Print the number of data points that belong to each cluster
+
+Plot the clustered data points:
+
+Using different colors for each cluster
+
+Plot the centroid positions for each cluster
+
+    \textbf{Answer:} \_\_\_
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}279}]:} \PY{k}{def} \PY{n+nf}{kmeans}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{k}\PY{p}{,} \PY{n}{maxiter}\PY{p}{,} \PY{n}{seed}\PY{o}{=}\PY{k+kc}{None}\PY{p}{)}\PY{p}{:}
+              \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+          \PY{l+s+sd}{    specify the number of clusters k and}
+          \PY{l+s+sd}{    the maximum iteration to run the algorithm}
+          \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+          
+              \PY{c+c1}{\PYZsh{} randomly choose k data points as initial centroids...}
+              \PY{n}{N} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{c+c1}{\PYZsh{} number of data points}
+              \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{n}{seed}\PY{p}{)} \PY{c+c1}{\PYZsh{} seed to replicate results}
+              \PY{n}{rand\PYZus{}indices} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{choice}\PY{p}{(}\PY{n}{N}\PY{p}{,} \PY{n}{k}\PY{p}{,} \PY{n}{replace}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)} \PY{c+c1}{\PYZsh{} random indices for centroids init}
+              \PY{n}{centroids} \PY{o}{=} \PY{n}{X}\PY{p}{[}\PY{n}{rand\PYZus{}indices}\PY{p}{]}
+              
+              \PY{k}{for} \PY{n}{itr} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{maxiter}\PY{p}{)}\PY{p}{:}
+                  \PY{c+c1}{\PYZsh{} \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+                  \PY{c+c1}{\PYZsh{} ASSIGNMENT STEP}
+                  \PY{c+c1}{\PYZsh{} \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+                  \PY{c+c1}{\PYZsh{} compute the distance matrix between each data point and the set of centroids}
+                  \PY{c+c1}{\PYZsh{} distance\PYZus{}matrix = \PYZsh{} row Index = data point Index; col Index = centroid Index; value=distance}
+                  \PY{n}{distance\PYZus{}matrix} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{empty}\PY{p}{(}\PY{p}{(}\PY{n}{N}\PY{p}{,} \PY{n}{k}\PY{p}{)}\PY{p}{)}
+                  \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{N}\PY{p}{)}\PY{p}{:}
+                      \PY{n}{data\PYZus{}point} \PY{o}{=} \PY{n}{X}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+                      \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{k}\PY{p}{)}\PY{p}{:}
+                          \PY{n}{centroid} \PY{o}{=} \PY{n}{centroids}\PY{p}{[}\PY{n}{j}\PY{p}{]}
+                          \PY{n}{distance\PYZus{}matrix}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{n}{j}\PY{p}{]} \PY{o}{=} \PY{n}{euclidean}\PY{p}{(}\PY{n}{data\PYZus{}point}\PY{p}{,} \PY{n}{centroid}\PY{p}{)}
+                          
+                  \PY{c+c1}{\PYZsh{} assign each data point to the closest centroid}
+                  \PY{c+c1}{\PYZsh{} cluster\PYZus{}assignment = \PYZsh{} array Index = data point Index; array value = closest centroid Index}
+                  \PY{n}{cluster\PYZus{}assignment} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{empty}\PY{p}{(}\PY{p}{(}\PY{n}{N}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+                  \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{N}\PY{p}{)}\PY{p}{:}
+                      \PY{n}{min\PYZus{}index} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{argmin}\PY{p}{(}\PY{n}{distance\PYZus{}matrix}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{} index of min }
+                      \PY{n}{cluster\PYZus{}assignment}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{min\PYZus{}index}
+                          
+                  \PY{c+c1}{\PYZsh{} UPDATE STEP}
+                  \PY{c+c1}{\PYZsh{} select all data points that belong to cluster i and compute}
+                  \PY{c+c1}{\PYZsh{} the mean of these data points (each feature individually)}
+                  \PY{c+c1}{\PYZsh{} this will be our new cluster centroids}
+                  \PY{n}{new\PYZus{}centroids} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{k}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+                  \PY{k}{for} \PY{n}{centroid} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{k}\PY{p}{)}\PY{p}{:}
+                      \PY{n}{indexes} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{argwhere}\PY{p}{(}\PY{n}{cluster\PYZus{}assignment}\PY{o}{==}\PY{n}{centroid}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}
+                      \PY{n}{new\PYZus{}centroid} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{n}{indexes}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{X}\PY{p}{[}\PY{n}{indexes}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+                      \PY{n}{new\PYZus{}centroids}\PY{p}{[}\PY{n}{centroid}\PY{p}{]} \PY{o}{=} \PY{n}{new\PYZus{}centroid}
+          
+                  \PY{c+c1}{\PYZsh{} STOP CONDITION}
+                  \PY{c+c1}{\PYZsh{} if centroids == new\PYZus{}centroids =\PYZgt{} stop}
+                  \PY{k}{if} \PY{p}{(}\PY{n}{centroids} \PY{o}{==} \PY{n}{new\PYZus{}centroids}\PY{p}{)}\PY{o}{.}\PY{n}{all}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                      \PY{k}{break}
+                  \PY{k}{else}\PY{p}{:}
+                      \PY{n}{centroids} \PY{o}{=} \PY{n}{new\PYZus{}centroids}
+              
+              \PY{k}{return} \PY{n}{centroids}\PY{p}{,} \PY{n}{cluster\PYZus{}assignment}
+          
+          
+          
+          \PY{k}{def} \PY{n+nf}{plot\PYZus{}clusters}\PY{p}{(}\PY{n}{centroids}\PY{p}{,} \PY{n}{X}\PY{p}{,} \PY{n}{clusters}\PY{p}{,} \PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+              \PY{n}{plt}\PY{o}{.}\PY{n}{rcParams}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{figure.figsize}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{6} 
+              \PY{n}{plt}\PY{o}{.}\PY{n}{rcParams}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{legend.loc}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{best}\PY{l+s+s1}{\PYZsq{}}
+              
+              \PY{n}{xmin}\PY{p}{,} \PY{n}{xmax} \PY{o}{=} \PY{n}{X}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)}\PY{o}{*}\PY{l+m+mf}{1.2}\PY{p}{,} \PY{n}{X}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{p}{)}\PY{o}{*}\PY{l+m+mf}{1.2}
+              \PY{n}{ymin}\PY{p}{,} \PY{n}{ymax} \PY{o}{=} \PY{n}{X}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)}\PY{o}{*}\PY{l+m+mf}{1.2}\PY{p}{,} \PY{n}{X}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{p}{)}\PY{o}{*}\PY{l+m+mf}{1.2}
+              \PY{n}{k} \PY{o}{=} \PY{n}{centroids}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{c+c1}{\PYZsh{} number of clusters}
+              
+              \PY{c+c1}{\PYZsh{} Clusters}
+              \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{k}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{indexes} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{argwhere}\PY{p}{(}\PY{n}{clusters}\PY{o}{==}\PY{n}{i}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}
+                  \PY{n}{cluster\PYZus{}size} \PY{o}{=} \PY{n}{indexes}\PY{o}{.}\PY{n}{size}
+                  \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{n}{indexes}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{X}\PY{p}{[}\PY{n}{indexes}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} 
+                              \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cluster }\PY{l+s+s1}{\PYZsq{}}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n}{i}\PY{p}{)}\PY{o}{+}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ | Size }\PY{l+s+s1}{\PYZsq{}}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n}{cluster\PYZus{}size}\PY{p}{)}\PY{p}{,} \PY{n}{s}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+              
+              \PY{c+c1}{\PYZsh{} Centroids}
+              \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{centroids}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{centroids}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{black}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Centroids}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{s}\PY{o}{=}\PY{l+m+mi}{50}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{}     plt.scatter(initial\PYZus{}centroids[::, 0], initial\PYZus{}centroids[::, 1], }
+          \PY{c+c1}{\PYZsh{}                 label=\PYZsq{}Initial centroids\PYZsq{}, s=50)}
+              
+              \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{n}{title}\PY{p}{)}
+              \PY{n}{plt}\PY{o}{.}\PY{n}{ylim}\PY{p}{(}\PY{n}{ymax}\PY{p}{,} \PY{n}{ymin}\PY{p}{)}
+              \PY{n}{plt}\PY{o}{.}\PY{n}{xlim}\PY{p}{(}\PY{n}{xmax}\PY{p}{,} \PY{n}{xmin}\PY{p}{)}
+              \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{frameon}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,} \PY{n}{loc}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{best}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{bbox\PYZus{}to\PYZus{}anchor}\PY{o}{=}\PY{p}{(}\PY{l+m+mf}{1.5}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+              \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}280}]:} \PY{n}{centroids}\PY{p}{,} \PY{n}{clusters} \PY{o}{=} \PY{n}{kmeans}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{1000}\PY{p}{,} \PY{n}{seed}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)} \PY{c+c1}{\PYZsh{} seed=0 bad clusters, seed=1 good clusters}
+          \PY{n}{plot\PYZus{}clusters}\PY{p}{(}\PY{n}{centroids}\PY{p}{,} \PY{n}{X}\PY{p}{,} \PY{n}{clusters}\PY{p}{,} \PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Kmeans clustering}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_12_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \textbf{Note:} With seed=1 the clustered data is relevant, but with
+seed=0 the clustering is bad. Kmeans result is closely closely tied up
+with the initialization of the centroids. If they are poorly initialized
+(seed=0) then the algorithm converge toward a local minimum with
+misclassified data in our clusters. \_\_\_
+
+    Question 2. Use the built-in k-means implementation in sklearn and
+determine centroids and clusters.
+
+Follow the guidelines below:
+
+Use the KMeans algorithm from sklearn
+
+Use the fit\_predict method to cluster data
+
+Use the cluster\_centers\_ method to retrieve centroids
+
+The output of your cell should contain the following information:
+
+Plot the clustered data points, using the same code your have produced
+for Question.1
+
+Using different colors for each cluster
+
+Plot the centroid positions for each cluster
+
+    \textbf{Answer:} \_\_\_
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}281}]:} \PY{n}{kmeans\PYZus{}clf} \PY{o}{=} \PY{n}{KMeans}\PY{p}{(}\PY{n}{n\PYZus{}clusters}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+          \PY{n}{clusters} \PY{o}{=} \PY{n}{kmeans\PYZus{}clf}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+          \PY{n}{centroids} \PY{o}{=} \PY{n}{kmeans\PYZus{}clf}\PY{o}{.}\PY{n}{cluster\PYZus{}centers\PYZus{}}
+          
+          \PY{n}{plot\PYZus{}clusters}\PY{p}{(}\PY{n}{centroids}\PY{p}{,} \PY{n}{X}\PY{p}{,} \PY{n}{clusters}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_16_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+    Question 3. Use the sklearn dataset API to generate alternative
+synthetic data to test your k-means algorithm implementation.
+
+Follow the guidelines from this document:
+http://scikit-learn.org/stable/auto\_examples/cluster/plot\_cluster\_comparison.html\#sphx-glr-auto-examples-cluster-plot-cluster-comparison-py
+
+The output of your cell should contain the following information:
+
+Plot the new synthetic dataset you generated
+
+Plot the clustered data points, using the same code your have produced
+for Question.1
+
+\begin{verbatim}
+<ul>
+    <li>Using different colors for each cluster</li>
+    <li>Plot the centroid positions for each cluster</li>
+</ul>
+\end{verbatim}
+
+    \textbf{Answer:} \_\_\_
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}282}]:} \PY{n}{X1}\PY{p}{,} \PY{n}{y1} \PY{o}{=} \PY{n}{datasets}\PY{o}{.}\PY{n}{make\PYZus{}circles}\PY{p}{(}\PY{n}{n\PYZus{}samples}\PY{o}{=}\PY{l+m+mi}{1500}\PY{p}{,} \PY{n}{factor}\PY{o}{=}\PY{o}{.}\PY{l+m+mi}{5}\PY{p}{,} \PY{n}{noise}\PY{o}{=}\PY{o}{.}\PY{l+m+mi}{05}\PY{p}{)}
+          
+          \PY{n}{centroids}\PY{p}{,} \PY{n}{clusters} \PY{o}{=} \PY{n}{kmeans}\PY{p}{(}\PY{n}{X1}\PY{p}{,} \PY{n}{k}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{maxiter}\PY{o}{=}\PY{l+m+mi}{1000}\PY{p}{)}
+          \PY{n}{plot\PYZus{}clusters}\PY{p}{(}\PY{n}{centroids}\PY{p}{,} \PY{n}{X1}\PY{p}{,} \PY{n}{clusters}\PY{p}{,} \PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{My Kmeans}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{n}{kmeans\PYZus{}clf} \PY{o}{=} \PY{n}{KMeans}\PY{p}{(}\PY{n}{n\PYZus{}clusters}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X1}\PY{p}{)}
+          \PY{n}{clusters}\PY{p}{,} \PY{n}{centroids} \PY{o}{=} \PY{n}{kmeans\PYZus{}clf}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X1}\PY{p}{)}\PY{p}{,} \PY{n}{kmeans\PYZus{}clf}\PY{o}{.}\PY{n}{cluster\PYZus{}centers\PYZus{}}
+          \PY{n}{plot\PYZus{}clusters}\PY{p}{(}\PY{n}{centroids}\PY{p}{,} \PY{n}{X1}\PY{p}{,} \PY{n}{clusters}\PY{p}{,} \PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Sklearn KMeans}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_20_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_20_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}283}]:} \PY{n}{X2}\PY{p}{,} \PY{n}{y2} \PY{o}{=} \PY{n}{datasets}\PY{o}{.}\PY{n}{make\PYZus{}moons}\PY{p}{(}\PY{n}{n\PYZus{}samples}\PY{o}{=}\PY{l+m+mi}{1500}\PY{p}{,} \PY{n}{noise}\PY{o}{=}\PY{o}{.}\PY{l+m+mi}{1}\PY{p}{)}
+          
+          \PY{n}{centroids}\PY{p}{,} \PY{n}{clusters} \PY{o}{=} \PY{n}{kmeans}\PY{p}{(}\PY{n}{X2}\PY{p}{,} \PY{n}{k}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{maxiter}\PY{o}{=}\PY{l+m+mi}{1000}\PY{p}{)}
+          \PY{n}{plot\PYZus{}clusters}\PY{p}{(}\PY{n}{centroids}\PY{p}{,} \PY{n}{X2}\PY{p}{,} \PY{n}{clusters}\PY{p}{,} \PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{My Kmeans}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{n}{kmeans\PYZus{}clf} \PY{o}{=} \PY{n}{KMeans}\PY{p}{(}\PY{n}{n\PYZus{}clusters}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X2}\PY{p}{)}
+          \PY{n}{clusters}\PY{p}{,} \PY{n}{centroids} \PY{o}{=} \PY{n}{kmeans\PYZus{}clf}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X2}\PY{p}{)}\PY{p}{,} \PY{n}{kmeans\PYZus{}clf}\PY{o}{.}\PY{n}{cluster\PYZus{}centers\PYZus{}}
+          \PY{n}{plot\PYZus{}clusters}\PY{p}{(}\PY{n}{centroids}\PY{p}{,} \PY{n}{X2}\PY{p}{,} \PY{n}{clusters}\PY{p}{,} \PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Sklearn KMeans}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_21_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_21_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+     
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+    \hypertarget{a-simplified-analysis-of-algorithm-convergence}{%
+\section{A simplified analysis of algorithm
+convergence}\label{a-simplified-analysis-of-algorithm-convergence}}
+
+One well-known weakness of \(k\)-means is that the algorithm's
+performance is closely tied with the randomly generated initial
+centroids' quality. If the algorithm starts with a set of bad inital
+centers, it will get stuck in a local minimum.
+
+Instead of taking a formal approach to study the convergence of
+\(k\)-means, let's study it with an experimental approach. One thing we
+can do is to build a measure of clustering quality: intuitively, a good
+clustering result should produce clusters in which data points should be
+very close to their centroids, and very far from other centroids. In
+this Notebook, we'll look at a metric called the \textbf{total within
+Sum of Squares}, which is sometimes referred ot as heterogeneity.
+Mathematically, we define heterogeneity as:
+
+\[
+\mathcal{H} = \sum_{j=1}^{k} \sum_{i: z_i=j} || \boldsymbol{x_i} - \boldsymbol{\mu_j}||_{2}^{2}
+\]
+
+Where \(k\) denotes the total number of clusters, \(x_i\) is the
+\(i\)-th data point, \(\mu_j\) is the \(j\)-th centroid, and
+\(|| \cdot ||_{2}^{2}\) denotes the squared L2 norm (Euclidean distance)
+between the two vectors.
+
+    Question 4. Modify your own version of k-means, to compute heterogeneity
+as defined above.
+
+Follow the guidelines below:
+
+Use the same method template you used in Question 1
+
+Add the code required to compute heterogeneity
+
+The function should return, in addition to the same return values as for
+the baseline version, the computed heterogeneity
+
+    \textbf{Answer:} \_\_\_
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}284}]:} \PY{k}{def} \PY{n+nf}{kmeans}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{k}\PY{p}{,} \PY{n}{maxiter}\PY{p}{,} \PY{n}{seed}\PY{o}{=}\PY{k+kc}{None}\PY{p}{)}\PY{p}{:}
+              \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+          \PY{l+s+sd}{    specify the number of clusters k and}
+          \PY{l+s+sd}{    the maximum iteration to run the algorithm}
+          \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+          
+              \PY{c+c1}{\PYZsh{} randomly choose k data points as initial centroids}
+              \PY{n}{N} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{c+c1}{\PYZsh{} number of data points}
+              \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{n}{seed}\PY{p}{)} \PY{c+c1}{\PYZsh{} seed to replicate results}
+              \PY{n}{rand\PYZus{}indices} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{choice}\PY{p}{(}\PY{n}{N}\PY{p}{,} \PY{n}{k}\PY{p}{,} \PY{n}{replace}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)} \PY{c+c1}{\PYZsh{} random indices for centroids init}
+              \PY{n}{centroids} \PY{o}{=} \PY{n}{X}\PY{p}{[}\PY{n}{rand\PYZus{}indices}\PY{p}{]}
+          
+              \PY{k}{for} \PY{n}{itr} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{maxiter}\PY{p}{)}\PY{p}{:}
+                  \PY{c+c1}{\PYZsh{} \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+                  \PY{c+c1}{\PYZsh{} ASSIGNMENT STEP}
+                  \PY{c+c1}{\PYZsh{} \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+                  \PY{c+c1}{\PYZsh{} compute the distance matrix between each data point and the set of centroids}
+                  \PY{c+c1}{\PYZsh{} distance\PYZus{}matrix = \PYZsh{} row Index = data point Index; col Index = centroid Index; value=distance}
+                  \PY{n}{distance\PYZus{}matrix} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{empty}\PY{p}{(}\PY{p}{(}\PY{n}{N}\PY{p}{,} \PY{n}{k}\PY{p}{)}\PY{p}{)}
+                  \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{N}\PY{p}{)}\PY{p}{:}
+                      \PY{n}{data\PYZus{}point} \PY{o}{=} \PY{n}{X}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+                      \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{k}\PY{p}{)}\PY{p}{:}
+                          \PY{n}{centroid} \PY{o}{=} \PY{n}{centroids}\PY{p}{[}\PY{n}{j}\PY{p}{]}
+                          \PY{n}{distance\PYZus{}matrix}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{n}{j}\PY{p}{]} \PY{o}{=} \PY{n}{euclidean}\PY{p}{(}\PY{n}{data\PYZus{}point}\PY{p}{,} \PY{n}{centroid}\PY{p}{)}
+                          
+                  \PY{c+c1}{\PYZsh{} assign each data point to the closest centroid}
+                  \PY{c+c1}{\PYZsh{} cluster\PYZus{}assignment = \PYZsh{} array Index = data point Index; array value = closest centroid Index}
+                  \PY{n}{cluster\PYZus{}assignment} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{empty}\PY{p}{(}\PY{p}{(}\PY{n}{N}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+                  \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{N}\PY{p}{)}\PY{p}{:}
+                      \PY{n}{min\PYZus{}index} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{argmin}\PY{p}{(}\PY{n}{distance\PYZus{}matrix}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{} index of min }
+                      \PY{n}{cluster\PYZus{}assignment}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{min\PYZus{}index}
+                          
+                  \PY{c+c1}{\PYZsh{} UPDATE STEP}
+                  \PY{c+c1}{\PYZsh{} select all data points that belong to cluster i and compute}
+                  \PY{c+c1}{\PYZsh{} the mean of these data points (each feature individually)}
+                  \PY{c+c1}{\PYZsh{} this will be our new cluster centroids}
+                  \PY{n}{new\PYZus{}centroids} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{k}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+                  \PY{k}{for} \PY{n}{centroid} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{k}\PY{p}{)}\PY{p}{:}
+                      \PY{n}{indexes} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{argwhere}\PY{p}{(}\PY{n}{cluster\PYZus{}assignment}\PY{o}{==}\PY{n}{centroid}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}
+                      \PY{n}{new\PYZus{}centroid} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{n}{indexes}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{X}\PY{p}{[}\PY{n}{indexes}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+                      \PY{n}{new\PYZus{}centroids}\PY{p}{[}\PY{n}{centroid}\PY{p}{]} \PY{o}{=} \PY{n}{new\PYZus{}centroid}
+          
+                  \PY{c+c1}{\PYZsh{} STOP CONDITION}
+                  \PY{c+c1}{\PYZsh{} if centroids == new\PYZus{}centroids =\PYZgt{} stop}
+                  \PY{k}{if} \PY{p}{(}\PY{n}{centroids} \PY{o}{==} \PY{n}{new\PYZus{}centroids}\PY{p}{)}\PY{o}{.}\PY{n}{all}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                      \PY{k}{break}
+                  \PY{k}{else}\PY{p}{:}
+                      \PY{n}{centroids} \PY{o}{=} \PY{n}{new\PYZus{}centroids}
+              
+              \PY{c+c1}{\PYZsh{} COMPUTE HETEROGENEITY}
+              \PY{n}{heterogeneity} \PY{o}{=} \PY{l+m+mi}{0}
+              \PY{k}{for} \PY{n}{centroid} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{k}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{indexes} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{argwhere}\PY{p}{(}\PY{n}{cluster\PYZus{}assignment}\PY{o}{==}\PY{n}{centroid}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}
+                  \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{X}\PY{p}{[}\PY{n}{indexes}\PY{p}{]}\PY{p}{:}
+                      \PY{n}{heterogeneity} \PY{o}{+}\PY{o}{=} \PY{n}{euclidean}\PY{p}{(}\PY{n}{centroids}\PY{p}{[}\PY{n}{centroid}\PY{p}{]}\PY{p}{,} \PY{n}{x}\PY{p}{)}
+                      
+              \PY{k}{return} \PY{n}{centroids}\PY{p}{,} \PY{n}{cluster\PYZus{}assignment}\PY{p}{,} \PY{n}{heterogeneity}
+\end{Verbatim}
+
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+    Question 5. Using the modified k-means method you designed, study
+algorithm convergence as a function of heterogeneity.
+
+Follow the guidelines below:
+
+Run the modified k-means for at least 5 different initial seed values
+
+Prepare a dictionary data structure containing: key = random seed, value
+= heterogeneity
+
+Print seed, heterogeneity values
+
+Add your personal comment about the convergence properties of the
+\(k\)-means algorithm.
+
+    \textbf{Answer}: \_\_\_
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}285}]:} \PY{n}{seeds} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randint}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1000}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+          \PY{c+c1}{\PYZsh{} seeds = range(50)}
+          
+          \PY{k}{def} \PY{n+nf}{heterogeneity}\PY{p}{(}\PY{n}{seeds}\PY{p}{,} \PY{n}{kmeans}\PY{p}{,} \PY{n}{k}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{,} \PY{n}{verbose}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}\PY{p}{:}
+              \PY{n}{heterogeneity\PYZus{}map} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+              \PY{n}{baseline} \PY{o}{=} \PY{l+m+mi}{0}
+              \PY{k}{for} \PY{n}{seed} \PY{o+ow}{in} \PY{n}{seeds}\PY{p}{:}
+                  \PY{n}{\PYZus{}}\PY{p}{,} \PY{n}{\PYZus{}}\PY{p}{,} \PY{n}{heterogeneity} \PY{o}{=} \PY{n}{kmeans}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{k}\PY{p}{,} \PY{l+m+mi}{1000}\PY{p}{,} \PY{n}{seed}\PY{o}{=}\PY{n}{seed}\PY{p}{)}
+                  \PY{n}{heterogeneity\PYZus{}map}\PY{p}{[}\PY{n}{seed}\PY{p}{]} \PY{o}{=} \PY{n}{heterogeneity}
+                  \PY{n}{baseline} \PY{o}{+}\PY{o}{=} \PY{n}{heterogeneity}
+              \PY{n}{baseline} \PY{o}{/}\PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{seeds}\PY{p}{)}
+              
+              \PY{k}{if} \PY{n}{verbose}\PY{p}{:}
+                  \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}:\PYZlt{}10\PYZcb{}}\PY{l+s+s1}{  }\PY{l+s+si}{\PYZob{}:\PYZlt{}10\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Seed:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Heterogeneity:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+                  \PY{k}{for} \PY{n}{seed}\PY{p}{,} \PY{n}{heterogeneity} \PY{o+ow}{in} \PY{n}{heterogeneity\PYZus{}map}\PY{o}{.}\PY{n}{items}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                      \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}:\PYZlt{}10\PYZcb{}}\PY{l+s+s1}{  }\PY{l+s+si}{\PYZob{}:\PYZlt{}10\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{seed}\PY{p}{,} \PY{n}{heterogeneity}\PY{p}{)}\PY{p}{)}
+              
+                  \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Baseline:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{baseline}\PY{p}{)}
+              \PY{k}{return} \PY{n}{baseline}
+              
+          \PY{n}{heterogeneity}\PY{p}{(}\PY{n}{seeds}\PY{p}{,} \PY{n}{kmeans}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Seed:       Heterogeneity:
+36          341.2491079096946
+554         222.8938630606885
+179         222.89386306068872
+843         222.89386306068846
+112         222.89386306068872
+Baseline: 246.56491203048978
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}285}]:} 246.56491203048978
+\end{Verbatim}
+            
+    \textbf{Note:} The K-means algorithm seems to always converge (not
+necessarily with the same number of iterations) but the results depends
+on the initialization. With different seeds=different initialization,
+the heterogeneity is different.
+
+\textbf{Baseline(average):} 222
+
+\textbf{I suspect that the Sklean KMeans compute an heterogeneity score
+for several seed and return the result with the lowest heterogeneity
+score, since the Sklearn KMeans always return the right clustering
+compared to my implementation.} \_\_\_
+
+    \hypertarget{a-technique-for-a-smart-centroid-initialization-k-means}{%
+\section{\texorpdfstring{A technique for a smart centroid
+initialization:
+\(k\)-means++}{A technique for a smart centroid initialization: k-means++}}\label{a-technique-for-a-smart-centroid-initialization-k-means}}
+
+One effective way to produce good initial centroids to feed to
+\(k\)-means is to proceed as follows: instead of randomly generating
+initial centroids, we will try to spread them out in our
+\(d\)-dimensional space, such that they are not ``too close'' to
+eachother. If you are interested in the details of this technique, you
+should refer to the link to the original research paper below: in
+summary, the \(k\)-means++ technique allows to improve the quality of
+the local optima in which \(k\)-means settles, and to reduce the average
+runtime of the algorithm.
+
+k-means++: the advantages of careful seeding, by David Arthur and Sergei
+Vassilvitskii (Stanford University)
+https://dl.acm.org/citation.cfm?id=1283494
+
+A simplified workflow of the \(k\)-means++ approach is as follows:
+
+\begin{itemize}
+\tightlist
+\item
+  Choose a data point at random from the dataset, this serves as the
+  first centroid
+\item
+  Compute the squared euclidean distance of all other data points to the
+  randomly chosen first centroid
+\item
+  To generate the next centroid, each data point is chosen with the
+  probability (weight) of its squared distance to the chosen center in
+  the current round, divided by the the total squared distance (this is
+  just a normalization to make sure the probability adds up to 1). In
+  other words, a new centroid should be as far as possible from the
+  other centroids
+\item
+  Next, recompute the probability (weight) of each data point as the
+  minimum of the distance between it and all the centers that are
+  already generated (e.g.~for the second iteration, compare the data
+  point's distance between the first and second center and choose the
+  smaller one)
+\item
+  Repeat step 3 and 4 until we have \(k\) initial centroids to feed to
+  the \(k\)-means algorithm
+\end{itemize}
+
+\ldots{}very very very * inf unclear explanations, a pseudo code would
+be better, the steps doesn't even make sense\ldots{} thk for wasting 3h
+
+    Question 6. Modify your own version of k-means, to introduce the smart
+initialization technique described above. Don't forget to keep track of
+heterogeneity as well! The whole point is to measure if k-means++ really
+improves on this metric.
+
+Follow the guidelines below:
+
+Use the same method template you used in Question 1
+
+Add the code required to compute the initial clusters according to
+k-means++
+
+Add the code required to compute heterogeneity
+
+The function should return, in addition to the same return values as for
+the baseline version, the computed heterogeneity
+
+    \textbf{Answer:} \_\_\_
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}286}]:} \PY{k}{def} \PY{n+nf}{init\PYZus{}centroids}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{k}\PY{p}{,} \PY{n}{plot}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{p}{:}
+              \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+          \PY{l+s+sd}{    K\PYZhy{}means++ init algorithm, return initalized centroids array}
+          \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+              \PY{n}{N} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+              \PY{n}{d} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{c+c1}{\PYZsh{} dimension of data (\PYZsh{}feature)}
+              \PY{n}{centroids} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+              \PY{n}{centroids}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randint}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{N}\PY{p}{)}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{} init first centroid}
+              
+              \PY{k}{if} \PY{n}{plot}\PY{p}{:}
+                  \PY{n}{plt}\PY{o}{.}\PY{n}{rcParams}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{figure.figsize}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{3} 
+                  \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+                  \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{X}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+                  \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{centroids}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{centroids}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+          
+              \PY{k}{for} \PY{n}{c\PYZus{}} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{k}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{distances} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{empty}\PY{p}{(}\PY{p}{(}\PY{n}{N}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+                  \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{N}\PY{p}{)}\PY{p}{:}
+                      \PY{n}{dist} \PY{o}{=} \PY{n}{euclidean}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{centroids}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)} 
+                      \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{centroids}\PY{p}{)}\PY{p}{)}\PY{p}{:} 
+                          \PY{n}{temp\PYZus{}dist} \PY{o}{=} \PY{n}{euclidean}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{centroids}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{)} 
+                          \PY{n}{dist} \PY{o}{=} \PY{n+nb}{min}\PY{p}{(}\PY{n}{dist}\PY{p}{,} \PY{n}{temp\PYZus{}dist}\PY{p}{)} 
+                      \PY{n}{distances}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{dist}
+                  
+                  \PY{n}{next\PYZus{}centroid} \PY{o}{=} \PY{n}{X}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{distances}\PY{p}{)}\PY{p}{]} 
+                  \PY{n}{centroids}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{next\PYZus{}centroid}\PY{p}{)} 
+                  
+                  \PY{k}{if} \PY{n}{plot}\PY{p}{:}
+                      \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+                      \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{X}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+                      \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{next\PYZus{}centroid}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{next\PYZus{}centroid}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)} 
+          
+              \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{centroids}\PY{p}{)}
+          
+          
+          
+          \PY{k}{def} \PY{n+nf}{kmeans}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{k}\PY{p}{,} \PY{n}{maxiter}\PY{p}{,} \PY{n}{seed}\PY{o}{=}\PY{k+kc}{None}\PY{p}{)}\PY{p}{:}
+              \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+          \PY{l+s+sd}{    specify the number of clusters k and}
+          \PY{l+s+sd}{    the maximum iteration to run the algorithm}
+          \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+          
+              \PY{c+c1}{\PYZsh{} randomly choose k data points as initial centroids}
+              \PY{n}{N} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{c+c1}{\PYZsh{} number of data points}
+              \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{n}{seed}\PY{p}{)} \PY{c+c1}{\PYZsh{} seed to replicate results}
+              \PY{n}{centroids} \PY{o}{=} \PY{n}{init\PYZus{}centroids}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{k}\PY{p}{)}
+          
+              \PY{k}{for} \PY{n}{itr} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{maxiter}\PY{p}{)}\PY{p}{:}
+                  \PY{c+c1}{\PYZsh{} \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+                  \PY{c+c1}{\PYZsh{} ASSIGNMENT STEP}
+                  \PY{c+c1}{\PYZsh{} \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}
+                  \PY{c+c1}{\PYZsh{} compute the distance matrix between each data point and the set of centroids}
+                  \PY{c+c1}{\PYZsh{} distance\PYZus{}matrix = \PYZsh{} row Index = data point Index; col Index = centroid Index; value=distance}
+                  \PY{n}{distance\PYZus{}matrix} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{empty}\PY{p}{(}\PY{p}{(}\PY{n}{N}\PY{p}{,} \PY{n}{k}\PY{p}{)}\PY{p}{)}
+                  \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{N}\PY{p}{)}\PY{p}{:}
+                      \PY{n}{data\PYZus{}point} \PY{o}{=} \PY{n}{X}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+                      \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{k}\PY{p}{)}\PY{p}{:}
+                          \PY{n}{centroid} \PY{o}{=} \PY{n}{centroids}\PY{p}{[}\PY{n}{j}\PY{p}{]}
+                          \PY{n}{distance\PYZus{}matrix}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{n}{j}\PY{p}{]} \PY{o}{=} \PY{n}{euclidean}\PY{p}{(}\PY{n}{data\PYZus{}point}\PY{p}{,} \PY{n}{centroid}\PY{p}{)}
+                          
+                  \PY{c+c1}{\PYZsh{} assign each data point to the closest centroid}
+                  \PY{c+c1}{\PYZsh{} cluster\PYZus{}assignment = \PYZsh{} array Index = data point Index; array value = closest centroid Index}
+                  \PY{n}{cluster\PYZus{}assignment} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{empty}\PY{p}{(}\PY{p}{(}\PY{n}{N}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+                  \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{N}\PY{p}{)}\PY{p}{:}
+                      \PY{n}{min\PYZus{}index} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{argmin}\PY{p}{(}\PY{n}{distance\PYZus{}matrix}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{} index of min }
+                      \PY{n}{cluster\PYZus{}assignment}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{min\PYZus{}index}
+                          
+                  \PY{c+c1}{\PYZsh{} UPDATE STEP}
+                  \PY{c+c1}{\PYZsh{} select all data points that belong to cluster i and compute}
+                  \PY{c+c1}{\PYZsh{} the mean of these data points (each feature individually)}
+                  \PY{c+c1}{\PYZsh{} this will be our new cluster centroids}
+                  \PY{n}{new\PYZus{}centroids} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{k}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+                  \PY{k}{for} \PY{n}{centroid} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{k}\PY{p}{)}\PY{p}{:}
+                      \PY{n}{indexes} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{argwhere}\PY{p}{(}\PY{n}{cluster\PYZus{}assignment}\PY{o}{==}\PY{n}{centroid}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}
+                      \PY{n}{new\PYZus{}centroid} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{n}{indexes}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{X}\PY{p}{[}\PY{n}{indexes}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+                      \PY{n}{new\PYZus{}centroids}\PY{p}{[}\PY{n}{centroid}\PY{p}{]} \PY{o}{=} \PY{n}{new\PYZus{}centroid}
+          
+                  \PY{c+c1}{\PYZsh{} STOP CONDITION}
+                  \PY{c+c1}{\PYZsh{} if centroids == new\PYZus{}centroids =\PYZgt{} stop}
+                  \PY{k}{if} \PY{p}{(}\PY{n}{centroids} \PY{o}{==} \PY{n}{new\PYZus{}centroids}\PY{p}{)}\PY{o}{.}\PY{n}{all}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                      \PY{k}{break}
+                  \PY{k}{else}\PY{p}{:}
+                      \PY{n}{centroids} \PY{o}{=} \PY{n}{new\PYZus{}centroids}
+              
+              \PY{c+c1}{\PYZsh{} COMPUTE HETEROGENEITY}
+              \PY{n}{heterogeneity} \PY{o}{=} \PY{l+m+mi}{0}
+              \PY{k}{for} \PY{n}{centroid} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{k}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{indexes} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{argwhere}\PY{p}{(}\PY{n}{cluster\PYZus{}assignment}\PY{o}{==}\PY{n}{centroid}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}
+                  \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{X}\PY{p}{[}\PY{n}{indexes}\PY{p}{]}\PY{p}{:}
+                      \PY{n}{heterogeneity} \PY{o}{+}\PY{o}{=} \PY{n}{euclidean}\PY{p}{(}\PY{n}{centroids}\PY{p}{[}\PY{n}{centroid}\PY{p}{]}\PY{p}{,} \PY{n}{x}\PY{p}{)}
+                      
+              \PY{k}{return} \PY{n}{centroids}\PY{p}{,} \PY{n}{cluster\PYZus{}assignment}\PY{p}{,} \PY{n}{heterogeneity}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}287}]:} \PY{n}{init\PYZus{}centroids}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{,} \PY{n}{plot}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)} 
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}287}]:} array([[-1.18652985,  2.7842772 ],
+                 [-1.5499458 ,  9.28293222],
+                 [ 3.43761754,  0.26165417],
+                 [ 2.40615694,  4.87047502]])
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_37_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_37_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_37_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_37_4.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \textbf{Note:} Kmeans++ is working as it should, we see on the plot that
+the centroids init is always the farther away from the already
+initialized centroids. This is great! \textbf{BUT} We still have to rely
+on the first random initialization
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+    Question 7. Similarly to question 5, using the modified k-means method
+you designed, study algorithm convergence as a function of
+heterogeneity.
+
+Follow the guidelines below:
+
+Run the modified k-means for at least 5 different initial seed values
+
+Prepare a dictionary data structure containing: key = random seed, value
+= heterogeneity
+
+Print seed, heterogeneity values
+
+One additional question to answer is the following: print the average
+heterogeneity for the baseline k-means algorithm, and the average
+heterogeneity when using the k-means++ initialization. Compare and
+comment with your own words.
+
+    \textbf{Answer:} \_\_\_
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}288}]:} \PY{n}{seeds} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randint}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1000}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+          \PY{n}{heterogeneity}\PY{p}{(}\PY{n}{seeds}\PY{p}{,} \PY{n}{kmeans}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Seed:       Heterogeneity:
+404         222.89386306068872
+951         222.89386306068872
+446         222.89386306068872
+281         222.89386306068872
+869         222.89386306068857
+Baseline: 222.8938630606887
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}288}]:} 222.8938630606887
+\end{Verbatim}
+            
+    \textbf{Baseline(average):} 222
+
+\textbf{Baseline heterogeneity score is better with Kmeans++ than with
+Kmeans.} It was expected, and it is working nicely. This improvement
+ensure consistency in the results on several runs. Only one centroids is
+initialized randomly now, all the others are computed to be the farthest
+away from one another.
+
+ 
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+    \hypertarget{determining-the-value-of-k-a-simple-and-visual-approach-called-the-elbow-method}{%
+\section{Determining the value of k: a simple and visual approach,
+called the Elbow
+method}\label{determining-the-value-of-k-a-simple-and-visual-approach-called-the-elbow-method}}
+
+Another problem of \(k\)-means is that we have to specify the number of
+clusters \(k\) before running the algorithm, which we often don't know a
+priori. There are many different heuristics for choosing a suitable
+value for \(k\), the simplest one being the \textbf{Elbow method}.
+Essentially, the idea is to run the \(k\)-means algorithm using
+different values of \(k\) and plot the corresponding heterogeneity. This
+measure will decrease as the number of clusters increases, because each
+cluster will be smaller and tighter. By visual inspection of the plot
+heterogeneity vs. \(k\), we will (hopefully!) see that the curve
+flattens out at some value of \(k\): this is what we call an ``elbow'',
+and we'll select the value of \(k\) corresponding to the ``elbow''
+position.
+
+    Question 8. Using the k-means algorithm you implemented, including the
+smart initialization technique, collect into an array the value of
+heterogeneity as a function of the number of clusters k, where k is to
+be selected in the range {[}2,10{]}.
+
+Your output cell should contain:
+
+The plot of heterogeneity vs.~k
+
+A discussion on your visual inspection of the curve, together with a
+justification for an appropriate choice of the value k
+
+    \textbf{Answer:} \_\_\_
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}231}]:} \PY{n}{seeds} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randint}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{20}\PY{p}{)}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}232}]:} \PY{n}{ks}\PY{p}{,} \PY{n}{hete} \PY{o}{=} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{)}\PY{p}{,} \PY{p}{[}\PY{p}{]}
+          \PY{n}{seeds} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randint}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+          
+          \PY{k}{for} \PY{n}{k} \PY{o+ow}{in} \PY{n}{ks}\PY{p}{:}
+              \PY{n}{baseline} \PY{o}{=} \PY{n}{heterogeneity}\PY{p}{(}\PY{n}{seeds}\PY{p}{,} \PY{n}{kmeans}\PY{p}{,} \PY{n}{k}\PY{p}{,} \PY{n}{verbose}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+              \PY{n}{hete}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{baseline}\PY{p}{)}
+          
+          \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{rcParams}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{figure.figsize}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{8}\PY{p}{,} \PY{l+m+mi}{6}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{ks}\PY{p}{,} \PY{n}{hete}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{KMeans++ heterogeneity vs k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{baseline heterogeneity}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+          \PY{n}{fig}\PY{o}{.}\PY{n}{savefig}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{heterogeneity\PYZus{}vs\PYZus{}k.png}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_48_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \textbf{Note:} I plot the baseline heterogeneity for several seeds vs
+several value of k. The plot confirms our expected results, the baseline
+heterogeneity curve ``breaks'' at k=4, confirming there are 4 clusters.
+
+ 
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+    \hypertarget{distributed-k-means-with-pyspark}{%
+\section{\texorpdfstring{Distributed \(k\)-means with
+PySpark}{Distributed k-means with PySpark}}\label{distributed-k-means-with-pyspark}}
+
+We're now ready to work on a distributed implmentation of the
+\(k\)-means algorithm, using the PySpark API.
+
+By now, you should be rather familiar with the \(k\)-means algorithm,
+which means we can focus on its parallel and distributed design.
+
+    \hypertarget{distributed-algorithm-pseudo-code}{%
+\subsection{Distributed algorithm pseudo
+code}\label{distributed-algorithm-pseudo-code}}
+
+The basic idea of distributed \(k\)-means is as follows: data points to
+be clustered should be stored as a distributed dataset, namely a RDD. As
+in the Notebook on distributed SGD, we will take a shortcut and avoid
+using HDFS RDDs: rather, we'll use sklearn to generate the data points,
+similary to the serial version of the algorithms, then use the
+\texttt{parallelize()} method to create an RDD, and determine the number
+of partitions.
+
+We also need to manipulate the centroids array: indeed, all machines
+should hold a copy of the centroid vector, such that they can proceed
+independently and in parallel in the first phase of the \(k\)-means
+algorithm, that is the \textbf{assignment step}. Specifically, every
+worker has a set of data points, and it will use a copy of the centroid
+vector to compute cluster assignement: we compute the distance between
+each data point and each centroid, to assign data points to their
+closest centroid.
+
+Once the assignement step is done, we need to recompute new centroids
+based on the assignement, that is, we execute the \textbf{update step}.
+Clearly, we will need to \textbf{shuffle} data over the network such
+that we will have, for each current centroid, the list of all data
+points that have been assigned to it. If you think about it, this
+problem should be familiar!! This is very similar to what we do in the
+Word Count example. As such, you will need to make sure the output of
+the update step is cast to a
+\texttt{\textless{}key,\ value\textgreater{}} type, where the key
+corresponds to a centroid identifier, and the value contains the list of
+data points associated to that centroid. The framework will take care of
+the distributed group by operation, and organize data according to the
+semantic of our algorithm.
+
+\textbf{NOTE:} since we will (potentially) work on large dataset sizes,
+we don't want our algorithm to return the final assignement after
+convergence, for otherwise we would need to collect a large amount of
+data in the driver machine, which has a finite and somehow limited
+amount of RAM.
+
+The pseudo code of the algorithm you need to implement is as follows:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{datapoints }\OperatorTok{=} \CommentTok{# Use sklearn, as usual, and work on blobs}
+\NormalTok{centroids }\OperatorTok{=} \CommentTok{# Random initialization}
+
+\ControlFlowTok{for}\NormalTok{ itr }\KeywordTok{in} \BuiltInTok{range}\NormalTok{(maxiter): }\CommentTok{# This for loop is executed by the driver}
+\NormalTok{    bcCentroids }\OperatorTok{=}\NormalTok{ sc.broadcast(centroids) }\CommentTok{# Use broadcast variables}
+    
+\NormalTok{    closest }\OperatorTok{=}\NormalTok{ datapoints.mapPartition(assignement_step) }\CommentTok{# This should happen in parallel}
+    
+\NormalTok{    centroids }\OperatorTok{=}\NormalTok{ closest.reduceByKey(update_step_sum). }\OperatorTok{\textbackslash{}} \CommentTok{# This should happen in parallel}
+        \BuiltInTok{map}\NormalTok{(update_step_mean). }\OperatorTok{\textbackslash{}} \CommentTok{# This should happen in parallel}
+\NormalTok{        collect() }\CommentTok{# Here we collect new centroids in the driver}
+\end{Highlighting}
+\end{Shaded}
+
+As you can see from the pseudo code, you need to figure out how to
+implement the \texttt{assignement\_step} function and the update\_step
+function. For the latter, the pseudo code gives you a big hint! Remember
+what we discussed in class about computing the mean!
+
+    Question 9. Implement the distributed version of the k-means algorithm,
+following the guidelines in the pseudo code.
+
+Your output cell should contain:
+
+The value of the centroids once the algorithm converges
+
+The total runtime of the distributed algorithm, in seconds
+
+A visualization of the data points and the computed centroids
+
+    \textbf{Answer:} \_\_\_
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}439}]:} \PY{k}{def} \PY{n+nf}{init\PYZus{}centroids}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{k}\PY{p}{,} \PY{n}{plot}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{p}{:}
+              \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+          \PY{l+s+sd}{    K\PYZhy{}means++ init algorithm, return initalized centroids array}
+          \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+              \PY{n}{N} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+              \PY{n}{d} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{c+c1}{\PYZsh{} dimension of data (\PYZsh{}feature)}
+              \PY{n}{centroids} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+              \PY{n}{centroids}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randint}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{N}\PY{p}{)}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{} init first centroid}
+              
+              \PY{k}{if} \PY{n}{plot}\PY{p}{:}
+                  \PY{n}{plt}\PY{o}{.}\PY{n}{rcParams}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{figure.figsize}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{3} 
+                  \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+                  \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{X}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+                  \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{centroids}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{centroids}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+          
+              \PY{k}{for} \PY{n}{c\PYZus{}} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{k}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{distances} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{empty}\PY{p}{(}\PY{p}{(}\PY{n}{N}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+                  \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{N}\PY{p}{)}\PY{p}{:}
+                      \PY{n}{dist} \PY{o}{=} \PY{n}{euclidean}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{centroids}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)} 
+                      \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{centroids}\PY{p}{)}\PY{p}{)}\PY{p}{:} 
+                          \PY{n}{temp\PYZus{}dist} \PY{o}{=} \PY{n}{euclidean}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{centroids}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{)} 
+                          \PY{n}{dist} \PY{o}{=} \PY{n+nb}{min}\PY{p}{(}\PY{n}{dist}\PY{p}{,} \PY{n}{temp\PYZus{}dist}\PY{p}{)} 
+                      \PY{n}{distances}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{dist}
+                  
+                  \PY{n}{next\PYZus{}centroid} \PY{o}{=} \PY{n}{X}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{distances}\PY{p}{)}\PY{p}{]} 
+                  \PY{n}{centroids}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{next\PYZus{}centroid}\PY{p}{)} 
+                  
+                  \PY{k}{if} \PY{n}{plot}\PY{p}{:}
+                      \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+                      \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{X}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+                      \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{next\PYZus{}centroid}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{next\PYZus{}centroid}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)} 
+          
+              \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{centroids}\PY{p}{)}
+          
+          
+          
+          \PY{k}{def} \PY{n+nf}{distributed\PYZus{}kmeans}\PY{p}{(}\PY{n}{datapoints}\PY{p}{,} \PY{n}{k}\PY{p}{,} \PY{n}{maxiter}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{,} \PY{n}{partitions}\PY{o}{=}\PY{l+m+mi}{6}\PY{p}{,} \PY{n}{seed}\PY{o}{=}\PY{k+kc}{None}\PY{p}{)}\PY{p}{:}
+              \PY{k}{def} \PY{n+nf}{assignement\PYZus{}step}\PY{p}{(}\PY{n}{data}\PY{p}{)}\PY{p}{:}
+                  \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+          \PY{l+s+sd}{        compute the distance between each data point and each centroid, }
+          \PY{l+s+sd}{        to assign data points to their closest centroid.}
+          \PY{l+s+sd}{        \PYZsq{}\PYZsq{}\PYZsq{}}
+                  \PY{n}{closest} \PY{o}{=} \PY{k}{lambda} \PY{n}{point}\PY{p}{:} \PY{n}{np}\PY{o}{.}\PY{n}{argmin}\PY{p}{(}\PY{p}{[}\PY{n}{euclidean}\PY{p}{(}\PY{n}{point}\PY{p}{,} \PY{n}{centroid}\PY{p}{)} \PY{k}{for} \PY{n}{centroid} \PY{o+ow}{in} \PY{n}{bcCentroids}\PY{o}{.}\PY{n}{value}\PY{p}{]}\PY{p}{)}
+              
+                  \PY{k}{for} \PY{n}{point} \PY{o+ow}{in} \PY{n}{data}\PY{p}{:}
+                      \PY{c+c1}{\PYZsh{} compute distance to centroids}
+                      \PY{n}{cluster} \PY{o}{=} \PY{n}{closest}\PY{p}{(}\PY{n}{point}\PY{p}{)}
+                      \PY{c+c1}{\PYZsh{} return closest centroids}
+                      \PY{k}{yield} \PY{p}{(}\PY{n}{cluster}\PY{p}{,} \PY{p}{[}\PY{n}{point}\PY{p}{]}\PY{p}{)}
+             
+          
+              \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{n}{seed}\PY{p}{)} \PY{c+c1}{\PYZsh{} seed to replicate results}
+              
+              \PY{n}{N} \PY{o}{=} \PY{n}{datapoints}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{c+c1}{\PYZsh{} number of data points}
+              \PY{n}{rand\PYZus{}indices} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{choice}\PY{p}{(}\PY{n}{N}\PY{p}{,} \PY{n}{k}\PY{p}{,} \PY{n}{replace}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)} \PY{c+c1}{\PYZsh{} random indices for centroids init}
+              
+              \PY{n}{rdd\PYZus{}datapoints} \PY{o}{=} \PY{n}{sc}\PY{o}{.}\PY{n}{parallelize}\PY{p}{(}\PY{n}{datapoints}\PY{p}{,} \PY{n}{partitions}\PY{p}{)}
+              \PY{n}{centroids} \PY{o}{=} \PY{n}{init\PYZus{}centroids}\PY{p}{(}\PY{n}{datapoints}\PY{p}{,} \PY{n}{k}\PY{p}{)}
+              
+              \PY{k}{for} \PY{n}{itr} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{maxiter}\PY{p}{)}\PY{p}{:} \PY{c+c1}{\PYZsh{} This for loop is executed by the driver}
+                  \PY{n}{bcCentroids} \PY{o}{=} \PY{n}{sc}\PY{o}{.}\PY{n}{broadcast}\PY{p}{(}\PY{n}{centroids}\PY{p}{)} \PY{c+c1}{\PYZsh{} Use broadcast variables}
+              
+                  \PY{n}{closest} \PY{o}{=} \PY{n}{rdd\PYZus{}datapoints}\PY{o}{.}\PY{n}{mapPartitions}\PY{p}{(}\PY{n}{assignement\PYZus{}step}\PY{p}{)} \PY{c+c1}{\PYZsh{} This should happen in parallel}
+                  \PY{n}{closest\PYZus{}reduced} \PY{o}{=} \PY{n}{closest}\PY{o}{.}\PY{n}{reduceByKey}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{,}\PY{n}{y}\PY{p}{:} \PY{p}{(}\PY{n}{x}\PY{o}{+}\PY{n}{y}\PY{p}{)}\PY{p}{)}
+                  
+                  \PY{n}{new\PYZus{}centroids} \PY{o}{=} \PY{n}{closest\PYZus{}reduced}\PY{o}{.}\PY{n}{map}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{collect}\PY{p}{(}\PY{p}{)}
+          
+                  \PY{k}{if} \PY{n}{np}\PY{o}{.}\PY{n}{all}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{new\PYZus{}centroids}\PY{p}{)} \PY{o}{==} \PY{n}{centroids}\PY{p}{)}\PY{p}{:}
+                      \PY{k}{break}
+                  \PY{n}{centroids} \PY{o}{=} \PY{n}{new\PYZus{}centroids}
+                  
+              \PY{k}{return} \PY{n}{centroids}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}446}]:} \PY{n}{clusters}\PY{o}{=}\PY{l+m+mi}{6}
+          \PY{n}{datapoints}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{n}{make\PYZus{}blobs}\PY{p}{(}\PY{n}{n\PYZus{}samples}\PY{o}{=}\PY{l+m+mi}{1000}\PY{p}{,} \PY{n}{centers}\PY{o}{=}\PY{n}{clusters}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{cluster\PYZus{}std}\PY{o}{=}\PY{l+m+mf}{0.6}\PY{p}{)}
+          \PY{n}{start} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{clock}\PY{p}{(}\PY{p}{)}
+          \PY{n}{centroids} \PY{o}{=} \PY{n}{distributed\PYZus{}kmeans}\PY{p}{(}\PY{n}{datapoints}\PY{p}{,} \PY{n}{k}\PY{o}{=}\PY{n}{clusters}\PY{p}{,} \PY{n}{seed}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+          \PY{n}{end} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{clock}\PY{p}{(}\PY{p}{)}
+          
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Computation time (CPU wall clock):}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{end}\PY{o}{\PYZhy{}}\PY{n}{start}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{s}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Computation time (CPU wall clock): 0.7909880000000271 s
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}447}]:} \PY{c+c1}{\PYZsh{} Final cluster assignements:}
+          \PY{n}{distance\PYZus{}matrix} \PY{o}{=} \PY{n}{pairwise\PYZus{}distances}\PY{p}{(}\PY{n}{datapoints}\PY{p}{,} \PY{n}{centroids}\PY{p}{,} \PY{n}{metric}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sqeuclidean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{} assign each data point to the closest centroid}
+          \PY{n}{cluster\PYZus{}assignment} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{argmin}\PY{p}{(}\PY{n}{distance\PYZus{}matrix}\PY{p}{,} \PY{n}{axis} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)}
+          
+          \PY{n}{plot\PYZus{}clusters}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{centroids}\PY{p}{)}\PY{p}{,} \PY{n}{datapoints}\PY{p}{,} \PY{n}{cluster\PYZus{}assignment}\PY{p}{,} \PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Distributed Kmeans}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_57_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+    Question 10. Answer the following questions:
+
+How many partitions did you use? Why?
+
+What is the size of the dataset you generate? Did you cache the dataset?
+What's the RAM occupation?
+
+What is the size of the shuffle data over the network? How does it
+compare to the dataset size?
+
+    \textbf{Answer:} \_\_\_
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}448}]:} \PY{k}{for} \PY{n}{partitions} \PY{o+ow}{in} \PY{p}{[}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{12}\PY{p}{]}\PY{p}{:}
+              \PY{n}{start} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{clock}\PY{p}{(}\PY{p}{)}
+              \PY{n}{centroids} \PY{o}{=} \PY{n}{distributed\PYZus{}kmeans}\PY{p}{(}\PY{n}{datapoints}\PY{p}{,} \PY{n}{k}\PY{o}{=}\PY{n}{clusters}\PY{p}{,} \PY{n}{partitions}\PY{o}{=}\PY{n}{partitions}\PY{p}{,} \PY{n}{seed}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+              \PY{n}{end} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{clock}\PY{p}{(}\PY{p}{)}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Partitions:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{partitions}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Computation Time:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{end}\PY{o}{\PYZhy{}}\PY{n}{start}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{s}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+              
+          \PY{c+c1}{\PYZsh{} Partitions: 2 Computation Time: 2.706029000000001 s}
+          \PY{c+c1}{\PYZsh{} Partitions: 4 Computation Time: 2.8432229999999663 s}
+          \PY{c+c1}{\PYZsh{} Partitions: 6 Computation Time: 0.588483999999994 s}
+          \PY{c+c1}{\PYZsh{} Partitions: 8 Computation Time: 0.7646010000000274 s}
+          \PY{c+c1}{\PYZsh{} Partitions: 10 Computation Time: 1.625304999999969 s}
+          \PY{c+c1}{\PYZsh{} Partitions: 12 Computation Time: 1.2196280000000002 s}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Partitions: 2 Computation Time: 2.706029000000001 s
+Partitions: 4 Computation Time: 2.8432229999999663 s
+Partitions: 6 Computation Time: 0.588483999999994 s
+Partitions: 8 Computation Time: 0.7646010000000274 s
+Partitions: 10 Computation Time: 1.625304999999969 s
+Partitions: 12 Computation Time: 1.2196280000000002 s
+
+    \end{Verbatim}
+
+    The cluster is composed of 2 workers each with 3 cores (6 cores in
+total). In the current configuration (1000 data points = small amount of
+data not using all RAM), the best option is 6 partitions. That is
+ensuring that all cores are used for computation. The best computation
+time is obtained when the computation is equally distributed accross the
+number of cores, it means with the current cluster having a number of
+partitions multiple of 6.
+
+    Question 11. Comparison between serial and distributed implementations.
+Given the dataset size you chose for your experiments, answer the
+following questions:
+
+Which is ``faster'', the serial or distributed implementation of
+k-means?
+
+What is a dataset size for which the distributed implementation is
+clearly faster than the serial one?
+
+What would be different in your code, should the input dataset reside on
+disk? Clearly, the input RDD would be reading from HDFS. Any other
+differences with respect to partitions?
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}

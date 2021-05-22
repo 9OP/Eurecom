@@ -1,0 +1,2 @@
+Val auc 0.78±0.01
+Test auc naive 0.79
